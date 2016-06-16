@@ -5,6 +5,7 @@
 
 #define PERSIST_SETTINGS_KEY	0
 
+// Application settings with defaults
 static Config m_config = {
 	
 	// 	.backgroundColor = GColorBlack,
@@ -35,10 +36,11 @@ static Config m_config = {
 	// 	.vibeOnCycle = "",
 };
 
+// Callback
 static ConfigChangedHandler m_handler = NULL;
 
-
 static uint32_t compute_max_size() {
+	// FIXME: ugly
 	return dict_calc_buffer_size(
 		19,
 		sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t),
@@ -49,6 +51,7 @@ static uint32_t compute_max_size() {
 	);	
 }
 
+// Handle incomming messages
 static void on_received(DictionaryIterator *iterator, void *context) {
 
 	bool anyChanged = false;
@@ -94,12 +97,6 @@ static void on_received(DictionaryIterator *iterator, void *context) {
 			anyChanged = true;
 		}
 
-		// Special treatment
-		else if (t->key == MESSAGE_KEY_DetectedTimeZoneOffset) {
-			m_config.detectedTimeZoneOffset = t->value->int32;
-			anyChanged = true;
-		}
-
 		// Power Saving
 		else if (t->key == MESSAGE_KEY_ShowSecondHand) {
 			m_config.showSecondHand = t->value->int32;
@@ -109,6 +106,11 @@ static void on_received(DictionaryIterator *iterator, void *context) {
 // 			anyChanged = true;
 		}
 
+		// Special treatment
+		else if (t->key == MESSAGE_KEY_DetectedTimeZoneOffset) {
+			m_config.detectedTimeZoneOffset = t->value->int32;
+			anyChanged = true;
+		}
 
 	}
 
@@ -124,24 +126,24 @@ static void on_received(DictionaryIterator *iterator, void *context) {
 
 void config_init(ConfigChangedHandler handler) {
 
-	// set defaults
+	// Set defaults for non constants
 	m_config.backgroundColor = GColorBlack;
 	m_config.foregroundColor = GColorWhite;
 	m_config.secondHandColor = GColorRed;
 	m_config.checkpointColor = GColorTiffanyBlue;
 	m_config.powerReserveColor = GColorLimerick;
 
-	// load
+	// load state
 	persist_read_data(PERSIST_SETTINGS_KEY, &m_config, sizeof m_config);
 	
-	// backward compatibility
+	// Upgrade old settings (bool to GColor)
 	if (!(m_config.secondHandColor.argb & 0x7f)) {
 		m_config.secondHandColor = GColorRed;
 	}
 	
 	m_handler = handler;
 
-	// start message
+	// Start message
 	{
 		app_message_register_inbox_received(on_received);
 		app_message_open(compute_max_size(), dict_calc_buffer_size(0));
@@ -154,18 +156,19 @@ void config_deinit(void) {
 	// stop messages
 	app_message_deregister_callbacks();
 
-	// backward compatibility
-	persist_delete(MESSAGE_KEY_BackgroundColor);
-	persist_delete(MESSAGE_KEY_ForegroundColor);
-	persist_delete(MESSAGE_KEY_ShowSecondHand);
-	persist_delete(MESSAGE_KEY_SecondHandColor);
-	persist_delete(MESSAGE_KEY_DetectedTimeZoneOffset);
+	// purge old settings
+	{
+		persist_delete(MESSAGE_KEY_BackgroundColor);
+		persist_delete(MESSAGE_KEY_ForegroundColor);
+		persist_delete(MESSAGE_KEY_ShowSecondHand);
+		persist_delete(MESSAGE_KEY_SecondHandColor);
+		persist_delete(MESSAGE_KEY_DetectedTimeZoneOffset);
+	}
 
-	// save
+	// Save state
 	persist_write_data(PERSIST_SETTINGS_KEY, &m_config, sizeof m_config);
 
 }	
-
 
 const Config *config_get(void) {
 	return &m_config;

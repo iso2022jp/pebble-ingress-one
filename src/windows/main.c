@@ -27,7 +27,7 @@ static int on_draw(GContext *ctx, void *arg) {
 	time_t timestamp = time(NULL);
 	struct tm *local = localtime(&timestamp); 
 
-	// Aplite uses local timestamp
+	// Workaround: aplite timestamp is local time
 	if (!clock_is_timezone_set()) {
 		timestamp += m_config->detectedTimeZoneOffset;
 	}
@@ -39,7 +39,7 @@ static int on_draw(GContext *ctx, void *arg) {
 	// Draw
 	//
 
-	// paint background
+	// Paint background
 	graphics_context_set_fill_color(ctx, m_config->backgroundColor);
 	graphics_fill_rect(ctx, m_bounds, 0, GCornerNone);	
 
@@ -61,7 +61,7 @@ static int on_draw(GContext *ctx, void *arg) {
 		panel_subclock_draw(ctx, local, timestamp);
 	}
 
-	// Date
+	// Calendar
 	panel_calendar_draw(ctx, local, timestamp);
 
 	// Hands
@@ -76,8 +76,6 @@ static int on_draw(GContext *ctx, void *arg) {
 
 static void on_update(Layer *layer, GContext *ctx) {
 
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Free: %d, Used: %d: Start", heap_bytes_free(), heap_bytes_used());
-
 	// 	GBitmap *offscreen = offscreen_create(m_bounds.size);
 	// 	offscreen_draw(ctx, offscreen, on_draw, NULL);
 	// 	graphics_draw_bitmap_in_rect(ctx, offscreen, m_bounds);
@@ -85,7 +83,7 @@ static void on_update(Layer *layer, GContext *ctx) {
 
 	on_draw(ctx, NULL);
 
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Free: %d, Used: %d: End", heap_bytes_free(), heap_bytes_used());
+	//APP_LOG(APP_LOG_LEVEL_DEBUG, "Free: %d, Used: %d: End", heap_bytes_free(), heap_bytes_used());
 
 }
 
@@ -141,10 +139,14 @@ static void on_unload(Window *window) {
 	window_destroy(m_window);
 }
 
+//
+//
+//
+
 static void notify_checkpoint() {
 
 	time_t timestamp = time(NULL);
-	struct tm *local = localtime(&timestamp); 
+	//struct tm *local = localtime(&timestamp); 
 
 	// Aplite uses local timestamp
 	if (!clock_is_timezone_set()) {

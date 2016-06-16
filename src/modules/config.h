@@ -3,7 +3,7 @@
 #pragma once
 #include <pebble.h>
 
-// max PERSIST_DATA_MAX_LENGTH bytes
+// Application settings
 typedef struct Config {
 
 	GColor backgroundColor;
@@ -31,7 +31,7 @@ typedef struct Config {
 
 // 	uint8_t showSecondOnTap;
 
-} __attribute__ ((packed)) Config;
+} __attribute__ ((packed)) Config; // saving space (limit PERSIST_DATA_MAX_LENGTH in persistent API)
 
 typedef void (* ConfigChangedHandler)(const Config *config);
 
