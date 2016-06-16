@@ -5,9 +5,14 @@
 // 2014 Cycle 01, CheckPoint 00 (2014-01-08 03:00 UTC)
 // 2016 Cycle 01, CheckPoint 00 (2016-01-07 07:00 UTC)
 
-void ingress_get_cycle(const time_t utc, Cycle *cycle) {
+// Compute ingress time
+void ingress_get_cycle(const time_t timestamp, Cycle *cycle) {
 
-	cycle->year = gmtime(&utc)->tm_year + 1900;
+	if (!cycle) {
+		return; // Boom
+	}
+
+	cycle->year = gmtime(&timestamp)->tm_year + 1900;
 
 	struct tm firstDay = {
 		.tm_year = cycle->year - 1900,
@@ -18,7 +23,7 @@ void ingress_get_cycle(const time_t utc, Cycle *cycle) {
 	time_t firstDayTime = mktime(&firstDay);
 	time_t firstCycle = (firstDayTime + SECONDS_PER_CYCLE - 1) / SECONDS_PER_CYCLE * SECONDS_PER_CYCLE;
 
-	if (utc < firstCycle) {
+	if (timestamp < firstCycle) {
 
 		--firstDay.tm_year;
 		--cycle->year;
@@ -26,9 +31,9 @@ void ingress_get_cycle(const time_t utc, Cycle *cycle) {
 		firstCycle = (firstDayTime + SECONDS_PER_CYCLE - 1) / SECONDS_PER_CYCLE * SECONDS_PER_CYCLE;
 
 	}
-	cycle->cycle = (utc - firstCycle) / SECONDS_PER_CYCLE;
+	cycle->cycle = (timestamp - firstCycle) / SECONDS_PER_CYCLE;
 
-	int duration = utc % SECONDS_PER_CYCLE;
+	int duration = timestamp % SECONDS_PER_CYCLE;
 	cycle->checkpoint = duration / SECONDS_PER_CHECKPOINT;
 	cycle->seconds = duration % SECONDS_PER_CHECKPOINT;
 

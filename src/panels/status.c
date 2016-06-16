@@ -39,29 +39,29 @@ void panel_status_reconfigure(void) {
 	
 }
 
-void panel_status_draw(GContext *ctx, struct tm *local, time_t timestamp) {
+void panel_status_draw(GContext *context, struct tm *local, time_t timestamp) {
 
-	graphics_context_set_text_color(ctx, COLOR_FALLBACK(m_config->powerReserveColor, m_config->foregroundColor));
-	graphics_context_set_stroke_color(ctx, m_config->foregroundColor);
-	graphics_context_set_stroke_width(ctx, 1);
-	graphics_context_set_fill_color(ctx, m_config->backgroundColor);
+	graphics_context_set_text_color(context, COLOR_FALLBACK(m_config->powerReserveColor, m_config->foregroundColor));
+	graphics_context_set_stroke_color(context, m_config->foregroundColor);
+	graphics_context_set_stroke_width(context, 1);
+	graphics_context_set_fill_color(context, m_config->backgroundColor);
 	
-	// Power guage
+	// Power Reserve Meter
 	{
 		const GRect plate = grect_crop(m_bounds, 4);
 		const GRect gauge1 = grect_crop(plate, -3);
 		const GRect gauge2 = grect_crop(plate, -6);
 
-		graphics_context_set_stroke_color(ctx, m_config->foregroundColor);
+		graphics_context_set_stroke_color(context, m_config->foregroundColor);
 		for (int i = 0; i < 20; ++i) {
 			const GPoint p1 = gpoint_from_polar(plate, GOvalScaleModeFitCircle, TRIG_MAX_ANGLE * i / 20);
 			const GPoint p2 = gpoint_from_polar(i % 10 ? gauge1 : gauge2, GOvalScaleModeFitCircle, TRIG_MAX_ANGLE * i / 20);
-			graphics_draw_line(ctx, p1, p2);
+			graphics_draw_line(context, p1, p2);
 		}
 		
-		graphics_context_set_stroke_width(ctx, 3);
-		graphics_context_set_stroke_color(ctx, COLOR_FALLBACK(m_config->powerReserveColor, m_config->foregroundColor));
-		graphics_draw_arc(ctx, plate, GOvalScaleModeFitCircle, 0, TRIG_MAX_ANGLE * (m_state.charge_percent) / 100);
+		graphics_context_set_stroke_width(context, 3);
+		graphics_context_set_stroke_color(context, COLOR_FALLBACK(m_config->powerReserveColor, m_config->foregroundColor));
+		graphics_draw_arc(context, plate, GOvalScaleModeFitCircle, 0, TRIG_MAX_ANGLE * (m_state.charge_percent) / 100);
 				
 	}
 
@@ -73,10 +73,10 @@ void panel_status_draw(GContext *ctx, struct tm *local, time_t timestamp) {
 		
 		char text[8];
 		
-		graphics_context_set_text_color(ctx, COLOR_FALLBACK(GColorYellow, m_config->foregroundColor));
+		graphics_context_set_text_color(context, COLOR_FALLBACK(GColorYellow, m_config->foregroundColor));
 		
 		snprintf(text, sizeof text, "%d%%", m_state.charge_percent);		
-		graphics_draw_text(ctx, text, m_codaFont12, r, GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter, NULL);
+		graphics_draw_text(context, text, m_codaFont12, r, GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter, NULL);
 
 		r.origin.y += 16;
 		r.origin.x += (r.size.w - ICON_SIZE * 2) / 2;
@@ -84,11 +84,11 @@ void panel_status_draw(GContext *ctx, struct tm *local, time_t timestamp) {
 		r.size.w = ICON_SIZE;
 
 		if (m_state.is_charging) {
-			graphics_draw_bitmap_in_rect(ctx, m_power, r);
+			graphics_draw_bitmap_in_rect(context, m_power, r);
 		}
 		if (m_connected) {
 			r.origin.x += ICON_SIZE;
-			graphics_draw_bitmap_in_rect(ctx, m_bluetooth, r);
+			graphics_draw_bitmap_in_rect(context, m_bluetooth, r);
 		}
 		
 	}

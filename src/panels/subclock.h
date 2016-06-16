@@ -8,4 +8,4 @@
 void panel_subclock_create(GRect bounds, const Config *config);
 void panel_subclock_destroy(void);
 void panel_subclock_reconfigure(void);
-void panel_subclock_draw(GContext *ctx, struct tm *local, time_t timestamp);
+void panel_subclock_draw(GContext *context, struct tm *local, time_t timestamp);

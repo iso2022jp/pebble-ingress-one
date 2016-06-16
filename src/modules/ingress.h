@@ -12,15 +12,17 @@
 #define MITUTES_PER_CYCLE		(MINUTES_PER_CHECKPOINT * CHECKPOINTS_PER_CYCLE)
 #define SECONDS_PER_CYCLE		(SECONDS_PER_CHECKPOINT * CHECKPOINTS_PER_CYCLE)
 
+// Ingress Time
+typedef struct Cycle {
+	int year;
+	int cycle; // 0-50
+	int checkpoint; // 0-34
+	int seconds; // 0-17999
+} Cycle;
+
+// TODO: functionalize
 #define ingress_is_checkpoint(timestamp)	(((timestamp) / SECONDS_PER_HOUR % HOURS_PER_CHECKPOINT) == 0)
 #define ingress_is_cycle(timestamp)			(((timestamp) / SECONDS_PER_HOUR % HOURS_PER_CYCLE) == 0)
 
-typedef struct Cycle {
-	int year;
-	int cycle;
-	int checkpoint;
-	int seconds;
-} Cycle;
-
+// Compute ingress time
 void ingress_get_cycle(const time_t time, Cycle *cycle);
-

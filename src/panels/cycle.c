@@ -30,17 +30,17 @@ void panel_cycle_reconfigure(void) {
 	
 }
 
-void panel_cycle_draw(GContext *ctx, struct tm *local, time_t timestamp) {
+void panel_cycle_draw(GContext *context, struct tm *local, time_t timestamp) {
 	
-	// graphics_context_set_text_color
-	graphics_context_set_stroke_color(ctx, m_config->foregroundColor);
-	graphics_context_set_stroke_width(ctx, 1);
-	// graphics_context_set_fill_color(ctx, m_config->backgroundColor);
+	// graphics_context_set_text_color(context, m_config->foregroundColor);
+	graphics_context_set_stroke_color(context, m_config->foregroundColor);
+	graphics_context_set_stroke_width(context, 1);
+	// graphics_context_set_fill_color(context, m_config->backgroundColor);
 
 	Cycle cycle;
 	ingress_get_cycle(timestamp, &cycle);
 
-	// cycle
+	// Cycle meter 
 	{
 		const GRect dial = grect_crop(m_bounds, 4);
 		const GRect gauge1 = grect_crop(dial, -3);
@@ -49,15 +49,15 @@ void panel_cycle_draw(GContext *ctx, struct tm *local, time_t timestamp) {
 		for (int i = 0; i < 35; ++i) {
 			const GPoint p1 = gpoint_from_polar(dial, GOvalScaleModeFitCircle, TRIG_MAX_ANGLE * i / 35);
 			const GPoint p2 = gpoint_from_polar(i % 5 ? gauge1 : gauge2, GOvalScaleModeFitCircle, TRIG_MAX_ANGLE * i / 35);
-			graphics_draw_line(ctx, p1, p2);
+			graphics_draw_line(context, p1, p2);
 		}
 		
-		graphics_context_set_stroke_width(ctx, 3);
-		graphics_context_set_stroke_color(ctx, COLOR_FALLBACK(m_config->checkpointColor, m_config->foregroundColor));
-		graphics_draw_arc(ctx, dial, GOvalScaleModeFitCircle, 0, TRIG_MAX_ANGLE * cycle.checkpoint / 35);
+		graphics_context_set_stroke_width(context, 3);
+		graphics_context_set_stroke_color(context, COLOR_FALLBACK(m_config->checkpointColor, m_config->foregroundColor));
+		graphics_draw_arc(context, dial, GOvalScaleModeFitCircle, 0, TRIG_MAX_ANGLE * cycle.checkpoint / 35);
 	}
 
-	// 
+	// Cycle #, Checkpoint#
 	{
 		GRect r = m_bounds;
 		r.origin.y += (r.size.h - 34) / 2;
@@ -65,15 +65,14 @@ void panel_cycle_draw(GContext *ctx, struct tm *local, time_t timestamp) {
 		
 		char text[8];
 		
-		graphics_context_set_text_color(ctx, COLOR_FALLBACK(m_config->checkpointColor, m_config->foregroundColor));
+		graphics_context_set_text_color(context, COLOR_FALLBACK(m_config->checkpointColor, m_config->foregroundColor));
 		
 		snprintf(text, sizeof text, "#%d", cycle.checkpoint + 1);
-		graphics_draw_text(ctx, text, m_codaFont12, r, GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter, NULL);
+		graphics_draw_text(context, text, m_codaFont12, r, GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter, NULL);
 
 		r.origin.y += 16;
-		//snprintf(text, sizeof text, "%d.%02d", cycle.year, cycle.cycle + 1);
 		snprintf(text, sizeof text, "%d.%02d", cycle.year, cycle.cycle + 1);
-		graphics_draw_text(ctx, text, m_codaFont10, r, GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter, NULL);
+		graphics_draw_text(context, text, m_codaFont10, r, GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter, NULL);
 	}
 
 }

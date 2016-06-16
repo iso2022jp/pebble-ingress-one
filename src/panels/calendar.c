@@ -29,12 +29,12 @@ void panel_calendar_reconfigure(void) {
 	
 }
 
-void panel_calendar_draw(GContext *ctx, struct tm *local, time_t timestamp) {
+void panel_calendar_draw(GContext *context, struct tm *local, time_t timestamp) {
 	
-	graphics_context_set_text_color(ctx, m_config->foregroundColor);
-	// graphics_context_set_stroke_color(ctx, m_config->foregroundColor);
-	// graphics_context_set_stroke_width(ctx, 1);
-	// graphics_context_set_fill_color(ctx, m_config->backgroundColor);
+	graphics_context_set_text_color(context, m_config->foregroundColor);
+	// graphics_context_set_stroke_color(context, m_config->foregroundColor);
+	// graphics_context_set_stroke_width(context, 1);
+	// graphics_context_set_fill_color(context, m_config->backgroundColor);
 
 	char text[9] = "";
 	
@@ -42,14 +42,14 @@ void panel_calendar_draw(GContext *ctx, struct tm *local, time_t timestamp) {
 	{
 		const GRect r = GRect(0, 30, m_bounds.size.w, 12);
 		strftime(text, sizeof text, "%a, %b", local);
-		graphics_draw_text(ctx, text, m_codaFont12, r, GTextOverflowModeFill, GTextAlignmentCenter, NULL);
+		graphics_draw_text(context, text, m_codaFont12, r, GTextOverflowModeFill, GTextAlignmentCenter, NULL);
 	}
 
 	// Day
 	{
 		const GRect r = GRect(0, 46, m_bounds.size.w, 24);
 		strftime(text, sizeof text, "%d", local);
-		graphics_draw_text(ctx, text, m_codaFont24, r, GTextOverflowModeFill, GTextAlignmentCenter, NULL);
+		graphics_draw_text(context, text, m_codaFont24, r, GTextOverflowModeFill, GTextAlignmentCenter, NULL);
 	}
 
 }

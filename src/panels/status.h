@@ -8,7 +8,7 @@
 void panel_status_create(GRect bounds, const Config *config);
 void panel_status_destroy(void);
 void panel_status_reconfigure(void);
-void panel_status_draw(GContext *ctx, struct tm *local, time_t timestamp);
+void panel_status_draw(GContext *context, struct tm *local, time_t timestamp);
 
 void panel_status_on_battery(BatteryChargeState charge);
 void panel_status_on_connect(bool connected);
