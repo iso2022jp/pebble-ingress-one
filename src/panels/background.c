@@ -2,11 +2,37 @@
 
 #include "panels/background.h"
 #include "modules/ingress.h"
+#include "modules/offscreen.h"
 
 #define HOUR_TO_TRIGANGLE(h)	DEG_TO_TRIGANGLE(h * 30)
 
 static GRect m_bounds;
 static const Config *m_config;
+
+#ifdef PBL_COLOR
+static GRect m_surfaceBounds;
+static GBitmap *m_surfaceBitmap;
+#endif
+
+#ifdef PBL_COLOR
+static void draw_surface(GContext *context, void *arg) {
+	
+	//APP_LOG(APP_LOG_LEVEL_DEBUG, "draw_surface: (%d, %d) %d x %d", bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
+	
+
+// 	graphics_context_set_stroke_color(context, GColorWhite);
+// 	graphics_context_set_stroke_width(context, 20);
+// 	graphics_draw_arc(context, bounds, GOvalScaleModeFitCircle, 0, TRIG_MAX_ANGLE);
+	
+	graphics_context_set_fill_color(context, GColorWhite);
+	//graphics_fill_circle(context, GPoint(74, 74), 74);
+	graphics_fill_radial(context, m_surfaceBounds, GOvalScaleModeFitCircle, 30, 0, TRIG_MAX_ANGLE);
+
+	//graphics_context_set_stroke_color(context, GColorWhite);
+	//graphics_draw_line(context, bounds.origin, GPoint(bounds.origin.x + bounds.size.w, bounds.origin.y + bounds.size.h));
+
+}
+#endif
 
 //
 // Module
@@ -18,23 +44,38 @@ void panel_background_create(GRect bounds, const Config *config) {
 }
 
 void panel_background_destroy(void) {
-
+#ifdef PBL_COLOR
+	if (m_surfaceBitmap) {
+		gbitmap_destroy(m_surfaceBitmap);
+		m_surfaceBitmap = NULL;
+	}
+#endif
 }
 
 void panel_background_reconfigure(void) {
-	
+#ifdef PBL_COLOR
+	if (m_surfaceBitmap) {
+		gbitmap_destroy(m_surfaceBitmap);
+		m_surfaceBitmap = NULL;
+	}
+#endif
 }
 
 void panel_background_draw(GContext *context, struct tm *local, time_t timestamp) {
+
+	// 8px inset dial circle (16px border)
+	const GRect dial = grect_crop(m_bounds, 8);
 
 	// graphics_context_set_text_color(context, m_config->foregroundColor);
 	// graphics_context_set_stroke_color(context, COLOR_FALLBACK(m_config->checkpointColor, m_config->foregroundColor));
 	// graphics_context_set_stroke_width(context, 1);
 	// graphics_context_set_fill_color(context, m_config->foregroundColor);
-
-	// 8px Padding
-	const GRect dial = grect_crop(m_bounds, 8);
-
+		
+	// Surface
+#ifdef PBL_COLOR
+	//graphics_draw_bitmap_in_rect(context, m_surfaceBitmap, m_surfaceBounds);
+#endif
+	
 	// Current checkpoint indicator
 	{
 		const int elapsed = ingress_get_elapsed(timestamp);

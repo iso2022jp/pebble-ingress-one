@@ -2,7 +2,7 @@
 
 // #include "modules/vector.h"
 
-// typedef struct ScaleContext {
+// typedef struct {
 // 	GSize from;
 // 	GSize to;
 // } ScaleContext;

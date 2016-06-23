@@ -45,7 +45,7 @@ void panel_status_draw(GContext *context, struct tm *local, time_t timestamp) {
 	graphics_context_set_stroke_color(context, m_config->foregroundColor);
 	graphics_context_set_stroke_width(context, 1);
 	graphics_context_set_fill_color(context, m_config->backgroundColor);
-	
+
 	// Power Reserve Meter
 	{
 		const GRect plate = grect_crop(m_bounds, 4);
@@ -83,6 +83,12 @@ void panel_status_draw(GContext *context, struct tm *local, time_t timestamp) {
 		r.size.h = ICON_SIZE; 
 		r.size.w = ICON_SIZE;
 
+		#ifdef PBL_COLOR
+		graphics_context_set_compositing_mode(context, GCompOpSet);
+		#else 
+		graphics_context_set_compositing_mode(context, gcolor_equal(m_config->backgroundColor, GColorBlack) ? GCompOpAssign : GCompOpAssignInverted);
+		#endif
+	
 		if (m_state.is_charging) {
 			graphics_draw_bitmap_in_rect(context, m_power, r);
 		}

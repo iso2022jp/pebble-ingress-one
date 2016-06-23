@@ -10,6 +10,7 @@ module.exports = [
 	// Appearance
 	{
 		type: 'section',
+		capabilities: ['COLOR'],
 		items: [
 			{
 				type: 'heading',
@@ -29,17 +30,18 @@ module.exports = [
 				defaultValue: '000000'
 			},
 */
-			{
-				type: 'color',
-				appKey: 'BackgroundColor',
-				label: 'Background Color',
-				defaultValue: '000000' // Black
-			},
+// 			{
+// 				type: 'color',
+// 				appKey: 'BackgroundColor',
+// 				label: 'Background Color',
+// 				defaultValue: '000000' // Black
+// 			},
 			{
 				type: 'color',
 				appKey: 'ForegroundColor',
 				label: 'Foreground Color',
-				defaultValue: 'FFFFFF' // White
+				defaultValue: 'FFFFFF', // White
+				capabilities: ['COLOR']
 			},
 			{
 				type: 'color',

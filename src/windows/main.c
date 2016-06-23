@@ -10,7 +10,7 @@
 #include "panels/hands.h"
 
 #include "modules/ingress.h"
-//#include "modules/offscreen.h"
+// #include "modules/offscreen.h"
 
 static Window *m_window;
 
@@ -18,7 +18,7 @@ static GRect m_bounds;
 static const Config *m_config;
 static int m_tapTimeout = 0;
 
-static int on_draw(GContext *ctx, void *arg) {
+static void on_draw(GContext *ctx, void *arg) {
 
 	//
 	// Prepare
@@ -33,7 +33,7 @@ static int on_draw(GContext *ctx, void *arg) {
 	}
 
 	graphics_context_set_antialiased(ctx, true);
-	//graphics_context_set_compositing_mode(ctx, GCompOpSet);
+	graphics_context_set_compositing_mode(ctx, PBL_IF_COLOR_ELSE(GCompOpSet, GCompOpAssign));
 
 	//
 	// Draw
@@ -67,7 +67,6 @@ static int on_draw(GContext *ctx, void *arg) {
 	// Hands
 	panel_hands_draw(ctx, local, timestamp);
 
-	return 0;
 }
 
 //
@@ -76,11 +75,7 @@ static int on_draw(GContext *ctx, void *arg) {
 
 static void on_update(Layer *layer, GContext *ctx) {
 
-	// 	GBitmap *offscreen = offscreen_create(m_bounds.size);
-	// 	offscreen_draw(ctx, offscreen, on_draw, NULL);
-	// 	graphics_draw_bitmap_in_rect(ctx, offscreen, m_bounds);
-	// 	gbitmap_destroy(offscreen);
-
+	//offscreen_draw(ctx, on_draw, NULL);
 	on_draw(ctx, NULL);
 
 	//APP_LOG(APP_LOG_LEVEL_DEBUG, "Free: %d, Used: %d: End", heap_bytes_free(), heap_bytes_used());

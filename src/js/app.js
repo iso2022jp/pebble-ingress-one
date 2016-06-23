@@ -11,7 +11,7 @@ var clay = new Clay(config, handler);
 Pebble.addEventListener('ready', function () {
 
 	var data = {
-		TimeZoneOffset: new Date().getTimezoneOffset() * 60
+		DetectedTimeZoneOffset: new Date().getTimezoneOffset() * 60
 	};
 
 	Pebble.sendAppMessage(data, function () {

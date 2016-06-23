@@ -13,7 +13,7 @@
 #define SECONDS_PER_CYCLE		(SECONDS_PER_CHECKPOINT * CHECKPOINTS_PER_CYCLE)
 
 // Ingress Time
-typedef struct Cycle {
+typedef struct {
 	int year;
 	int cycle; // 0-50
 	int checkpoint; // 0-34

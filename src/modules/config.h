@@ -4,7 +4,7 @@
 #include <pebble.h>
 
 // Application settings
-typedef struct Config {
+typedef struct {
 
 	GColor backgroundColor;
 	GColor foregroundColor;
