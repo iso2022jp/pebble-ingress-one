@@ -23,6 +23,7 @@ typedef struct Cycle {
 // TODO: functionalize
 #define ingress_is_checkpoint(timestamp)	(((timestamp) / SECONDS_PER_HOUR % HOURS_PER_CHECKPOINT) == 0)
 #define ingress_is_cycle(timestamp)			(((timestamp) / SECONDS_PER_HOUR % HOURS_PER_CYCLE) == 0)
+#define ingress_get_elapsed(timestamp)		((timestamp) % SECONDS_PER_CHECKPOINT)
 
 // Compute ingress time
 void ingress_get_cycle(const time_t time, Cycle *cycle);
