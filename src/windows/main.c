@@ -90,15 +90,17 @@ static void on_load(Window *window) {
 	m_config = config_get();
 
 	layer_set_update_proc(root, on_update);
+	
+	const GRect base = grect_crop(m_bounds, PBL_IF_ROUND_ELSE(0, -8));
 
-	panel_background_create(m_bounds, m_config);
+	panel_background_create(base, m_config);
 
 	// indial ring
 	{
-		const int width = m_bounds.size.w / 3;
+		const int width = base.size.w / 3;
 		const GSize size = GSize(width, width);
 
-		const GRect ring = grect_crop(m_bounds, m_bounds.size.w >> 2);
+		const GRect ring = grect_crop(base, base.size.w >> 2);
 
 		{
 			const GRect r = grect_centered_from_polar(ring, GOvalScaleModeFitCircle, DEG_TO_TRIGANGLE(90), size);
@@ -115,8 +117,8 @@ static void on_load(Window *window) {
 
 	}
 
-	panel_calendar_create(m_bounds, m_config);
-	panel_hands_create(m_bounds, m_config);
+	panel_calendar_create(base, m_config);
+	panel_hands_create(base, m_config);
 
 }
 

@@ -5,6 +5,7 @@
 #include "modules/offscreen.h"
 
 #define HOUR_TO_TRIGANGLE(h)	DEG_TO_TRIGANGLE(h * 30)
+#define MIN(p, q)				((p) <= (q) ? (p) : (q))
 #define MAX(p, q)				((p) >= (q) ? (p) : (q))
 
 static GRect m_bounds;
@@ -55,7 +56,7 @@ void panel_background_draw(GContext *context, struct tm *local, time_t timestamp
 	#ifdef PBL_COLOR
 	graphics_draw_bitmap_in_rect(context, m_surfaceBitmap, m_surfaceBounds);
 	graphics_context_set_fill_color(context, m_config->backgroundColor);
-	graphics_fill_radial(context, m_surfaceClippingBounds, GOvalScaleModeFillCircle, m_surfaceClippingInset, 0, TRIG_MAX_ANGLE);
+	graphics_fill_radial(context, m_surfaceClippingBounds, GOvalScaleModeFitCircle, m_surfaceClippingInset, 0, TRIG_MAX_ANGLE);
 	#endif
 
 	// Current checkpoint indicator

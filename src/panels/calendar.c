@@ -40,14 +40,14 @@ void panel_calendar_draw(GContext *context, struct tm *local, time_t timestamp) 
 	
 	// Weekday, Month
 	{
-		const GRect r = GRect(0, 30, m_bounds.size.w, 12);
+		const GRect r = GRect(m_bounds.origin.x, m_bounds.origin.y + m_bounds.size.h / 6, m_bounds.size.w, 12);
 		strftime(text, sizeof text, "%a, %b", local);
 		graphics_draw_text(context, text, m_codaFont12, r, GTextOverflowModeFill, GTextAlignmentCenter, NULL);
 	}
 
 	// Day
 	{
-		const GRect r = GRect(0, 46, m_bounds.size.w, 24);
+		const GRect r = GRect(m_bounds.origin.x, m_bounds.origin.y + m_bounds.size.h / 4, m_bounds.size.w, 24);
 		strftime(text, sizeof text, "%d", local);
 		graphics_draw_text(context, text, m_codaFont24, r, GTextOverflowModeFill, GTextAlignmentCenter, NULL);
 	}
