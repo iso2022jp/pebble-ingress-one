@@ -4,7 +4,9 @@
 #include "modules/ingress.h"
 #include "modules/offscreen.h"
 
-#define HOUR_TO_TRIGANGLE(h)	DEG_TO_TRIGANGLE(h * 30)
+#define MINUTE_TO_TRIGANGLE(m)	DEG_TO_TRIGANGLE((m) * 6)
+#define HOUR_TO_TRIGANGLE(h)	DEG_TO_TRIGANGLE((h) * 30)
+
 #define MIN(p, q)				((p) <= (q) ? (p) : (q))
 #define MAX(p, q)				((p) >= (q) ? (p) : (q))
 
@@ -45,7 +47,7 @@ void panel_background_reconfigure(void) {
 void panel_background_draw(GContext *context, struct tm *local, time_t timestamp) {
 
 	// 8px inset dial circle (16px border)
-	const GRect dial = grect_crop(m_bounds, 8);
+	GRect dial = grect_crop(m_bounds, 8);
 
 	// graphics_context_set_text_color(context, m_config->foregroundColor);
 	// graphics_context_set_stroke_color(context, COLOR_FALLBACK(m_config->checkpointColor, m_config->foregroundColor));
@@ -76,13 +78,20 @@ void panel_background_draw(GContext *context, struct tm *local, time_t timestamp
 		#endif
 
 	}
+	
+	// XXX
+	++dial.size.w;
+	++dial.size.h;
 
 	// Indices
 	{
 		graphics_context_set_fill_color(context, m_config->foregroundColor);
-		for (int i = 0; i <= 360; i += 6) {
-			const GPoint p = gpoint_from_polar(dial, GOvalScaleModeFitCircle, DEG_TO_TRIGANGLE(i));
-			graphics_fill_circle(context, p, i % 30 ? 1 : 2);
+		for (int m = 0; m < 60; ++m) {
+			const int size = m % 5 ? 2 : 4;
+			const GRect r = grect_centered_from_polar(dial, GOvalScaleModeFitCircle, MINUTE_TO_TRIGANGLE(m), GSize(size, size));
+			graphics_fill_radial(context, r, GOvalScaleModeFitCircle, size, 0, TRIG_MAX_ANGLE);
+// 			const GPoint p = gpoint_from_polar(dial, GOvalScaleModeFitCircle, MINUTE_TO_TRIGANGLE(m));
+// 			graphics_fill_circle(context, p, m % 5 ? 1 : 3);
 		}
 	}
 

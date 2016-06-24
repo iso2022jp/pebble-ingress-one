@@ -66,6 +66,7 @@ void panel_hands_draw(GContext *context, struct tm *local, time_t timestamp) {
 		graphics_context_set_fill_color(context, m_config->backgroundColor);
 		graphics_fill_circle(context, p, 2);
 	}
+	
 	// Locator
 	{
 		const GRect r = grect_crop(m_bounds, 8);
@@ -79,7 +80,7 @@ void panel_hands_draw(GContext *context, struct tm *local, time_t timestamp) {
 		#endif
 		
 		gpath_move_to(m_hourLocator, p);
-		graphics_context_set_fill_color(context, COLOR_FALLBACK(GColorGreen, m_config->backgroundColor));
+		graphics_context_set_fill_color(context, COLOR_FALLBACK(GColorYellow, m_config->backgroundColor));
 		gpath_draw_filled(context, m_hourLocator);
 		graphics_context_set_stroke_color(context, COLOR_FALLBACK(GColorChromeYellow, m_config->foregroundColor));
 		graphics_context_set_stroke_width(context, 1);
