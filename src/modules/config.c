@@ -16,8 +16,8 @@ static Config m_config = {
 	
 	.showCyclePanel = 1,
 	// .checkpointColor = GColorTiffanyBlue,
-	._reserved1 = 1,
-	._reserved2 = 1,
+	// .locationMarkerColor = GColorYellow
+	// .locationMarkerBorderColor = GColorChromeYellow,
 	
 	.showStatusPanel = 1,
 	// .powerReserveColor = GColorLimerick,
@@ -43,10 +43,11 @@ static uint32_t compute_max_size() {
 	// FIXME: ugly
 	return dict_calc_buffer_size(
 		19,
-		sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t),
+		sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t),
+		sizeof (int32_t),
 		sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), 
 		sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), 
-		sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t),
+		sizeof (int32_t), sizeof (int32_t), sizeof (int32_t), sizeof (int32_t),
 		sizeof (int32_t)
 	);	
 }
@@ -58,7 +59,7 @@ static void on_received(DictionaryIterator *iterator, void *context) {
 
 	for (Tuple *t = dict_read_first(iterator); t; t = dict_read_next(iterator)) {
 
-		// General
+		// Appearance
 		if (t->key == MESSAGE_KEY_BackgroundColor) {
 			m_config.backgroundColor = GColorFromHEX(t->value->int32);
 			anyChanged = true;
@@ -67,6 +68,12 @@ static void on_received(DictionaryIterator *iterator, void *context) {
 			anyChanged = true;
 		} else if (t->key == MESSAGE_KEY_SecondHandColor) {
 			m_config.secondHandColor = GColorFromHEX(t->value->int32);
+			anyChanged = true;
+		} else if (t->key == MESSAGE_KEY_LocationMarkerColor) {
+			m_config.locationMarkerColor = GColorFromHEX(t->value->int32);
+			anyChanged = true;
+		} else if (t->key == MESSAGE_KEY_LocationMarkerBorderColor) {
+			m_config.locationMarkerBorderColor = GColorFromHEX(t->value->int32);
 			anyChanged = true;
 		}
 
@@ -87,7 +94,7 @@ static void on_received(DictionaryIterator *iterator, void *context) {
 			m_config.powerReserveColor = GColorFromHEX(t->value->int32);
 			anyChanged = true;
 		}
-
+				
 		// Sub clock
 		else if (t->key == MESSAGE_KEY_ShowSubclock) {
 			m_config.showSubclock = t->value->int32;
@@ -120,6 +127,23 @@ static void on_received(DictionaryIterator *iterator, void *context) {
 
 }
 
+static void upgrade() {
+		
+	// bool to GColor
+	if (!(m_config.locationMarkerColor.argb & 0x80)) {
+		m_config.secondHandColor = GColorRed;
+	}
+
+	// reserved to GColor
+	if (!(m_config.locationMarkerColor.argb & 0x80)) {
+		m_config.locationMarkerColor = GColorYellow;
+	}
+	if (!(m_config.locationMarkerBorderColor.argb & 0x80)) {
+		m_config.locationMarkerBorderColor = GColorChromeYellow;
+	}
+
+}
+
 //
 // Module
 //
@@ -132,14 +156,14 @@ void config_init(ConfigChangedHandler handler) {
 	m_config.secondHandColor = GColorRed;
 	m_config.checkpointColor = GColorTiffanyBlue;
 	m_config.powerReserveColor = GColorLimerick;
+	m_config.locationMarkerColor = GColorYellow;
+	m_config.locationMarkerBorderColor = GColorChromeYellow;
 
-	// load state
+	// Load state
 	persist_read_data(PERSIST_SETTINGS_KEY, &m_config, sizeof m_config);
 	
-	// Upgrade old settings (bool to GColor)
-	if (!(m_config.secondHandColor.argb & 0x7f)) {
-		m_config.secondHandColor = GColorRed;
-	}
+	// Upgrade old settings
+	upgrade();
 	
 	m_handler = handler;
 

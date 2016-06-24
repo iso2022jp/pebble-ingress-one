@@ -15,8 +15,8 @@ typedef struct {
 	
 	uint8_t showCyclePanel;
 	GColor checkpointColor;
-	uint8_t _reserved1;
-	uint8_t _reserved2;
+	GColor locationMarkerColor;
+	GColor locationMarkerBorderColor;
 
 	uint8_t showStatusPanel;
 	GColor powerReserveColor;
@@ -27,6 +27,7 @@ typedef struct {
 	uint8_t _reserved6;
 	uint8_t _reserved7;
 	uint8_t _reserved8;
+
 	int32_t subclockTimeZoneOffset;
 
 // 	uint8_t showSecondOnTap;

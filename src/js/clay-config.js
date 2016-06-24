@@ -4,7 +4,7 @@ module.exports = [
 
 	{
 		type: 'heading',
-		defaultValue: 'Configuration'
+		defaultValue: 'Configuration',
 	},
 
 	// Appearance
@@ -14,7 +14,8 @@ module.exports = [
 		items: [
 			{
 				type: 'heading',
-				defaultValue: 'Appearance'
+				defaultValue: 'Appearance',
+				capabilities: ['COLOR'],
 			},
 			/*
 			{
@@ -34,21 +35,36 @@ module.exports = [
 // 				type: 'color',
 // 				appKey: 'BackgroundColor',
 // 				label: 'Background Color',
-// 				defaultValue: '000000' // Black
+// 				defaultValue: '000000', // Black
+// 				capabilities: ['COLOR'],
 // 			},
 			{
 				type: 'color',
 				appKey: 'ForegroundColor',
 				label: 'Foreground Color',
 				defaultValue: 'FFFFFF', // White
-				capabilities: ['COLOR']
+				capabilities: ['COLOR'],
 			},
 			{
 				type: 'color',
 				appKey: 'SecondHandColor',
 				label: 'Second Hand Color',
 				defaultValue: 'FF0000', // Red
-				capabilities: ['COLOR']
+				capabilities: ['COLOR'],
+			},
+			{
+				type: 'color',
+				appKey: 'LocationMarkerColor',
+				label: 'Location Marker Color',
+				defaultValue: 'FFFF00', // Yellow
+				capabilities: ['COLOR'],
+			},
+			{
+				type: 'color',
+				appKey: 'LocationMarkerBorderColor',
+				label: 'Location Marker Color (Border)',
+				defaultValue: 'FFAA00', // ChromeYellow
+				capabilities: ['COLOR'],
 			}
 		]
 	},
@@ -59,7 +75,7 @@ module.exports = [
 		items: [
 			{
 				type: 'heading',
-				defaultValue: 'Checkpoint/Cycle'
+				defaultValue: 'Checkpoint/Cycle',
 			},
 			{
 				type: 'toggle',
@@ -72,7 +88,7 @@ module.exports = [
 				appKey: 'CheckpointColor',
 				label: 'Checkpoint/Cycle Color',
 				defaultValue: '00AAAA', // Tiffany Blue
-				capabilities: ['COLOR']
+				capabilities: ['COLOR'],
 			}
 		]
 	},
@@ -83,20 +99,20 @@ module.exports = [
 		items: [
 			{
 				type: 'heading',
-				defaultValue: 'Status'
+				defaultValue: 'Status',
 			},
 			{
 				type: 'toggle',
 				appKey: 'ShowStatusPanel',
 				label: 'Show Status Panel',
-				defaultValue: true
+				defaultValue: true,
 			},
 			{
 				type: 'color',
 				appKey: 'PowerReserveColor',
 				label: 'Power Reserve Color',
 				defaultValue: 'AAAA00', // Limerick
-				capabilities: ['COLOR']
+				capabilities: ['COLOR'],
 			}
 		]
 	},
@@ -107,13 +123,13 @@ module.exports = [
 		items: [
 			{
 				type: 'heading',
-				defaultValue: 'Subclock'
+				defaultValue: 'Subclock',
 			},
 			{
 				type: 'toggle',
 				appKey: 'ShowSubclock',
 				label: 'Show Subclock',
-				defaultValue: true
+				defaultValue: true,
 			},
 // 			{
 // 				type: 'slider',
@@ -168,13 +184,13 @@ module.exports = [
 		items: [
 			{
 				type: 'heading',
-				defaultValue: 'Power Saving'
+				defaultValue: 'Power Saving',
 			},
 			{
 				type: 'toggle',
 				appKey: 'ShowSecondHand',
 				label: 'Show Second Hand',
-				defaultValue: true
+				defaultValue: true,
 			}
 // 			{
 // 				type: 'toggle',
@@ -187,7 +203,7 @@ module.exports = [
 
 	{
 		type: 'submit',
-		defaultValue: 'Save'
+		defaultValue: 'Save',
 	}
 
 ];

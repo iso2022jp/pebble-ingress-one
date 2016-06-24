@@ -21,7 +21,9 @@
             "PowerReserveColor",
             "ShowSubclock",
             "SubclockTimeZoneOffset",
-            "ShowSecondOnTap"
+            "ShowSecondOnTap",
+            "LocationMarkerColor",
+            "LocationMarkerBorderColor"
         ],
         "projectType": "native",
         "resources": {

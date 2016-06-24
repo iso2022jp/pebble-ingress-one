@@ -75,14 +75,14 @@ void panel_hands_draw(GContext *context, struct tm *local, time_t timestamp) {
 
 		#if PBL_COLOR
 		gpath_move_to(m_hourLocator, GPoint(p.x + 2, p.y + 2));
-		graphics_context_set_fill_color(context, COLOR_FALLBACK(GColorChromeYellow, m_config->foregroundColor));
+		graphics_context_set_fill_color(context, COLOR_FALLBACK(m_config->locationMarkerBorderColor, m_config->foregroundColor));
 		gpath_draw_filled(context, m_hourLocator);
 		#endif
 		
 		gpath_move_to(m_hourLocator, p);
-		graphics_context_set_fill_color(context, COLOR_FALLBACK(GColorYellow, m_config->backgroundColor));
+		graphics_context_set_fill_color(context, COLOR_FALLBACK(m_config->locationMarkerColor, m_config->backgroundColor));
 		gpath_draw_filled(context, m_hourLocator);
-		graphics_context_set_stroke_color(context, COLOR_FALLBACK(GColorChromeYellow, m_config->foregroundColor));
+		graphics_context_set_stroke_color(context, COLOR_FALLBACK(m_config->locationMarkerBorderColor, m_config->foregroundColor));
 		graphics_context_set_stroke_width(context, 1);
 		gpath_draw_outline(context, m_hourLocator);
 
