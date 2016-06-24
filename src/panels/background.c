@@ -5,6 +5,7 @@
 #include "modules/offscreen.h"
 
 #define HOUR_TO_TRIGANGLE(h)	DEG_TO_TRIGANGLE(h * 30)
+#define MAX(p, q)				((p) >= (q) ? (p) : (q))
 
 static GRect m_bounds;
 static const Config *m_config;
@@ -12,26 +13,8 @@ static const Config *m_config;
 #ifdef PBL_COLOR
 static GRect m_surfaceBounds;
 static GBitmap *m_surfaceBitmap;
-#endif
-
-#ifdef PBL_COLOR
-static void draw_surface(GContext *context, void *arg) {
-	
-	//APP_LOG(APP_LOG_LEVEL_DEBUG, "draw_surface: (%d, %d) %d x %d", bounds.origin.x, bounds.origin.y, bounds.size.w, bounds.size.h);
-	
-
-// 	graphics_context_set_stroke_color(context, GColorWhite);
-// 	graphics_context_set_stroke_width(context, 20);
-// 	graphics_draw_arc(context, bounds, GOvalScaleModeFitCircle, 0, TRIG_MAX_ANGLE);
-	
-	graphics_context_set_fill_color(context, GColorWhite);
-	//graphics_fill_circle(context, GPoint(74, 74), 74);
-	graphics_fill_radial(context, m_surfaceBounds, GOvalScaleModeFitCircle, 30, 0, TRIG_MAX_ANGLE);
-
-	//graphics_context_set_stroke_color(context, GColorWhite);
-	//graphics_draw_line(context, bounds.origin, GPoint(bounds.origin.x + bounds.size.w, bounds.origin.y + bounds.size.h));
-
-}
+static int m_surfaceClippingInset;
+static GRect m_surfaceClippingBounds;
 #endif
 
 //
@@ -41,24 +24,21 @@ static void draw_surface(GContext *context, void *arg) {
 void panel_background_create(GRect bounds, const Config *config) {
 	m_bounds = bounds;
 	m_config = config;
+	#ifdef PBL_COLOR
+	m_surfaceBitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_SURFACE);
+	m_surfaceBounds = grect_crop(m_bounds, 16);
+	m_surfaceClippingInset = MAX(m_surfaceBounds.size.w, m_surfaceBounds.size.h) >> 2;
+	m_surfaceClippingBounds = grect_crop(m_surfaceBounds, -m_surfaceClippingInset);
+	#endif
 }
 
 void panel_background_destroy(void) {
-#ifdef PBL_COLOR
-	if (m_surfaceBitmap) {
-		gbitmap_destroy(m_surfaceBitmap);
-		m_surfaceBitmap = NULL;
-	}
-#endif
+	#ifdef PBL_COLOR
+	gbitmap_destroy(m_surfaceBitmap);
+	#endif
 }
 
 void panel_background_reconfigure(void) {
-#ifdef PBL_COLOR
-	if (m_surfaceBitmap) {
-		gbitmap_destroy(m_surfaceBitmap);
-		m_surfaceBitmap = NULL;
-	}
-#endif
 }
 
 void panel_background_draw(GContext *context, struct tm *local, time_t timestamp) {
@@ -70,12 +50,14 @@ void panel_background_draw(GContext *context, struct tm *local, time_t timestamp
 	// graphics_context_set_stroke_color(context, COLOR_FALLBACK(m_config->checkpointColor, m_config->foregroundColor));
 	// graphics_context_set_stroke_width(context, 1);
 	// graphics_context_set_fill_color(context, m_config->foregroundColor);
-		
+
 	// Surface
-#ifdef PBL_COLOR
-	//graphics_draw_bitmap_in_rect(context, m_surfaceBitmap, m_surfaceBounds);
-#endif
-	
+	#ifdef PBL_COLOR
+	graphics_draw_bitmap_in_rect(context, m_surfaceBitmap, m_surfaceBounds);
+	graphics_context_set_fill_color(context, m_config->backgroundColor);
+	graphics_fill_radial(context, m_surfaceClippingBounds, GOvalScaleModeFillCircle, m_surfaceClippingInset, 0, TRIG_MAX_ANGLE);
+	#endif
+
 	// Current checkpoint indicator
 	{
 		const int elapsed = ingress_get_elapsed(timestamp);
@@ -91,7 +73,7 @@ void panel_background_draw(GContext *context, struct tm *local, time_t timestamp
 		graphics_context_set_fill_color(context, m_config->foregroundColor);
 		graphics_fill_radial(context, m_bounds, GOvalScaleModeFitCircle, 2, HOUR_TO_TRIGANGLE(from), HOUR_TO_TRIGANGLE(to));
 		#endif
-	
+
 	}
 
 	// Indices
@@ -115,7 +97,7 @@ void panel_background_draw(GContext *context, struct tm *local, time_t timestamp
 			i < 12;
 			++i, ++h, t += SECONDS_PER_HOUR
 		) {
-			
+
 			if (!ingress_is_checkpoint(t)) {
 				continue;
 			}
@@ -130,9 +112,9 @@ void panel_background_draw(GContext *context, struct tm *local, time_t timestamp
 				graphics_context_set_fill_color(context, m_config->backgroundColor);
 				graphics_fill_circle(context, p, 3);
 			}
-	
+
 		}
 
 	}
-	
+
 }

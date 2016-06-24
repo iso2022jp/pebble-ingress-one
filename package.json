@@ -27,6 +27,15 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/surface.png",
+                    "name": "IMAGE_SURFACE",
+                    "targetPlatforms": [
+                        "basalt",
+                        "chalk"
+                    ],
+                    "type": "bitmap"
+                },
+                {
                     "file": "images/bluetooth.png",
                     "name": "IMAGE_BLUETOOTH",
                     "targetPlatforms": null,
