@@ -1,8 +1,8 @@
 /* This software is released under the MIT License, see LICENSE */
 
 #pragma once
-#include <pebble.h>
 
+#include <pebble.h>
 #include "modules/config.h"
 
 void panel_hands_create(GRect bounds, const Config *config);

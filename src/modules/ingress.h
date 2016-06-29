@@ -1,6 +1,7 @@
 /* This software is released under the MIT License, see LICENSE */
 
 #pragma once
+
 #include <pebble.h>
 
 #define HOURS_PER_CHECKPOINT	5

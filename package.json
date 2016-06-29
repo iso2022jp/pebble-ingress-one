@@ -29,6 +29,21 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/bluetooth-connected.png",
+                    "name": "IMAGE_BLUETOOTH_CONNECTED",
+                    "targetPlatforms": [
+                        "basalt",
+                        "chalk"
+                    ],
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/bluetooth-disconnected.png",
+                    "name": "IMAGE_BLUETOOTH_DISCONNECTED",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
                     "file": "images/surface.png",
                     "name": "IMAGE_SURFACE",
                     "targetPlatforms": [

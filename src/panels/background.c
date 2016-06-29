@@ -3,12 +3,7 @@
 #include "panels/background.h"
 #include "modules/ingress.h"
 #include "modules/offscreen.h"
-
-#define MINUTE_TO_TRIGANGLE(m)	DEG_TO_TRIGANGLE((m) * 6)
-#define HOUR_TO_TRIGANGLE(h)	DEG_TO_TRIGANGLE((h) * 30)
-
-#define MIN(p, q)				((p) <= (q) ? (p) : (q))
-#define MAX(p, q)				((p) >= (q) ? (p) : (q))
+#include "misc.h"
 
 static GRect m_bounds;
 static const Config *m_config;

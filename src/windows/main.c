@@ -75,7 +75,7 @@ static void on_draw(GContext *ctx, void *arg) {
 
 static void on_update(Layer *layer, GContext *ctx) {
 
-	//offscreen_draw(ctx, on_draw, NULL);
+	// offscreen_draw(ctx, on_draw, NULL);
 	on_draw(ctx, NULL);
 
 	//APP_LOG(APP_LOG_LEVEL_DEBUG, "Free: %d, Used: %d: End", heap_bytes_free(), heap_bytes_used());
@@ -219,6 +219,7 @@ void main_on_battery(BatteryChargeState charge) {
 }
 
 void main_on_focus(bool in_focus) {
+	main_invalidate();
 }
 
 void main_on_tap(AccelAxisType axis, int32_t direction) {
