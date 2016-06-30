@@ -52,7 +52,7 @@ void panel_hands_draw(GContext *context, struct tm *local, time_t timestamp) {
 	
 	// Hour hand
 	{
-		const GRect r = grect_crop(m_bounds, 40);
+		const GRect r = grect_crop(m_bounds, 50);
 		const GPoint p = gpoint_from_polar(r, GOvalScaleModeFitCircle, hourTrigangle);
 
 		graphics_context_set_stroke_color(context, m_config->foregroundColor);
