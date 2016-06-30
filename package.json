@@ -29,21 +29,6 @@
         "resources": {
             "media": [
                 {
-                    "file": "images/bluetooth-connected.png",
-                    "name": "IMAGE_BLUETOOTH_CONNECTED",
-                    "targetPlatforms": [
-                        "basalt",
-                        "chalk"
-                    ],
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/bluetooth-disconnected.png",
-                    "name": "IMAGE_BLUETOOTH_DISCONNECTED",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
                     "file": "images/surface.png",
                     "name": "IMAGE_SURFACE",
                     "targetPlatforms": [
@@ -53,20 +38,8 @@
                     "type": "bitmap"
                 },
                 {
-                    "file": "images/bluetooth.png",
-                    "name": "IMAGE_BLUETOOTH",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
                     "file": "images/power.png",
                     "name": "IMAGE_POWER",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/ingress.png",
-                    "name": "IMAGE_INGRESS",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
@@ -78,9 +51,35 @@
                     "type": "png"
                 },
                 {
-                    "characterRegex": "[0-9.]",
+                    "file": "images/ingress.png",
+                    "name": "IMAGE_INGRESS",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/bluetooth.png",
+                    "name": "IMAGE_BLUETOOTH",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/bluetooth-disconnected.png",
+                    "name": "IMAGE_BLUETOOTH_DISCONNECTED",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/bluetooth-connected.png",
+                    "name": "IMAGE_BLUETOOTH_CONNECTED",
+                    "targetPlatforms": [
+                        "basalt",
+                        "chalk"
+                    ],
+                    "type": "bitmap"
+                },
+                {
                     "file": "fonts/coda.ttf",
-                    "name": "FONT_CODA_10",
+                    "name": "FONT_CODA_12",
                     "targetPlatforms": null,
                     "type": "font"
                 },
@@ -91,8 +90,9 @@
                     "type": "font"
                 },
                 {
+                    "characterRegex": "[0-9.]",
                     "file": "fonts/coda.ttf",
-                    "name": "FONT_CODA_12",
+                    "name": "FONT_CODA_10",
                     "targetPlatforms": null,
                     "type": "font"
                 }

@@ -10,7 +10,7 @@
 #include "panels/hands.h"
 
 #include "modules/ingress.h"
-// #include "modules/offscreen.h"
+#include "modules/offscreen.h"
 
 static Window *m_window;
 
@@ -75,8 +75,8 @@ static void on_draw(GContext *ctx, void *arg) {
 
 static void on_update(Layer *layer, GContext *ctx) {
 
-	// offscreen_draw(ctx, on_draw, NULL);
-	on_draw(ctx, NULL);
+	offscreen_draw(ctx, on_draw, NULL);
+	// on_draw(ctx, NULL);
 
 	//APP_LOG(APP_LOG_LEVEL_DEBUG, "Free: %d, Used: %d: End", heap_bytes_free(), heap_bytes_used());
 
