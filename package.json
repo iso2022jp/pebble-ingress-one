@@ -67,8 +67,9 @@
                     "type": "bitmap"
                 },
                 {
+                    "characterRegex": "[0-9.]",
                     "file": "fonts/coda.ttf",
-                    "name": "FONT_CODA_12",
+                    "name": "FONT_CODA_10",
                     "targetPlatforms": null,
                     "type": "font"
                 },
@@ -79,9 +80,8 @@
                     "type": "font"
                 },
                 {
-                    "characterRegex": "[0-9.]",
                     "file": "fonts/coda.ttf",
-                    "name": "FONT_CODA_10",
+                    "name": "FONT_CODA_12",
                     "targetPlatforms": null,
                     "type": "font"
                 }

@@ -222,9 +222,11 @@ void main_on_focus(bool in_focus) {
 	main_invalidate();
 }
 
+/*
 void main_on_tap(AccelAxisType axis, int32_t direction) {
 	m_tapTimeout = 3;
 }
+*/
 
 void main_on_tick(struct tm *tick_time, TimeUnits units_changed) {
 

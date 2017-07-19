@@ -160,7 +160,7 @@ void config_init(ConfigChangedHandler handler) {
 	m_config.locationMarkerBorderColor = GColorChromeYellow;
 
 	// Load state
-	persist_read_data(PERSIST_SETTINGS_KEY, &m_config, sizeof m_config);
+	//persist_read_data(PERSIST_SETTINGS_KEY, &m_config, sizeof m_config);
 	
 	// Upgrade old settings
 	upgrade();

@@ -5,9 +5,9 @@ module.exports = function () {
 	var clayConfig = this;
 	
 	function setupToggle(switchName, switchTarget) {
-		var toggle = clayConfig.getItemByAppKey(switchName);
+		var toggle = clayConfig.getItemByMessageKey(switchName);
 		var handler = function () {
-			clayConfig.getItemByAppKey(switchTarget)[this.get() ? 'show' : 'hide']();
+			clayConfig.getItemByMessageKey(switchTarget)[this.get() ? 'show' : 'hide']();
 		};		
 		toggle.on('change', handler);
 		handler.call(toggle);		

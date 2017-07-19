@@ -20,48 +20,48 @@ module.exports = [
 			/*
 			{
 				type: 'toggle',
-				appKey: 'AutoTimezone',
+				messageKey: 'AutoTimezone',
 				label: 'Auto Timezone',
 				defaultValue: true
 			},
 			{
 				type: 'color',
-				appKey: 'Timezone',
+				messageKey: 'Timezone',
 				label: 'Timezone',
 				defaultValue: '000000'
 			},
 */
 // 			{
 // 				type: 'color',
-// 				appKey: 'BackgroundColor',
+// 				messageKey: 'BackgroundColor',
 // 				label: 'Background Color',
 // 				defaultValue: '000000', // Black
 // 				capabilities: ['COLOR'],
 // 			},
 			{
 				type: 'color',
-				appKey: 'ForegroundColor',
+				messageKey: 'ForegroundColor',
 				label: 'Foreground Color',
 				defaultValue: 'FFFFFF', // White
 				capabilities: ['COLOR'],
 			},
 			{
 				type: 'color',
-				appKey: 'SecondHandColor',
+				messageKey: 'SecondHandColor',
 				label: 'Second Hand Color',
 				defaultValue: 'FF0000', // Red
 				capabilities: ['COLOR'],
 			},
 			{
 				type: 'color',
-				appKey: 'LocationMarkerColor',
+				messageKey: 'LocationMarkerColor',
 				label: 'Location Marker Color',
 				defaultValue: 'FFFF00', // Yellow
 				capabilities: ['COLOR'],
 			},
 			{
 				type: 'color',
-				appKey: 'LocationMarkerBorderColor',
+				messageKey: 'LocationMarkerBorderColor',
 				label: 'Location Marker Color (Border)',
 				defaultValue: 'FFAA00', // ChromeYellow
 				capabilities: ['COLOR'],
@@ -79,13 +79,13 @@ module.exports = [
 			},
 			{
 				type: 'toggle',
-				appKey: 'ShowCyclePanel',
+				messageKey: 'ShowCyclePanel',
 				label: 'Show Cycle Panel',
 				defaultValue: true,
 			},
 			{
 				type: 'color',
-				appKey: 'CheckpointColor',
+				messageKey: 'CheckpointColor',
 				label: 'Checkpoint/Cycle Color',
 				defaultValue: '00AAAA', // Tiffany Blue
 				capabilities: ['COLOR'],
@@ -103,13 +103,13 @@ module.exports = [
 			},
 			{
 				type: 'toggle',
-				appKey: 'ShowStatusPanel',
+				messageKey: 'ShowStatusPanel',
 				label: 'Show Status Panel',
 				defaultValue: true,
 			},
 			{
 				type: 'color',
-				appKey: 'PowerReserveColor',
+				messageKey: 'PowerReserveColor',
 				label: 'Power Reserve Color',
 				defaultValue: 'AAAA00', // Limerick
 				capabilities: ['COLOR'],
@@ -127,13 +127,13 @@ module.exports = [
 			},
 			{
 				type: 'toggle',
-				appKey: 'ShowSubclock',
+				messageKey: 'ShowSubclock',
 				label: 'Show Subclock',
 				defaultValue: true,
 			},
 // 			{
 // 				type: 'slider',
-// 				appKey: 'SubTimeZoneOffset',
+// 				messageKey: 'SubTimeZoneOffset',
 // 				label: 'Subclock Time Zone',
 // 				defaultValue: 0, // UTC
 // 				min: -12 * 60 * 60,
@@ -153,7 +153,7 @@ module.exports = [
 // 			},
 // 			{
 // 				type: 'select',
-// 				appKey: 'VibeOnCheckpoint',
+// 				messageKey: 'VibeOnCheckpoint',
 // 				label: 'Two brief vibes on Cycle ends',
 // 				defaultValue: '',
 // 				options: [
@@ -165,7 +165,7 @@ module.exports = [
 // 			},
 // 			{
 // 				type: 'select',
-// 				appKey: 'VibeOnCycle',
+// 				messageKey: 'VibeOnCycle',
 // 				label: 'Two brief vibes on Cycle ends',
 // 				defaultValue: '',
 // 				options: [
@@ -188,13 +188,13 @@ module.exports = [
 			},
 			{
 				type: 'toggle',
-				appKey: 'ShowSecondHand',
+				messageKey: 'ShowSecondHand',
 				label: 'Show Second Hand',
 				defaultValue: true,
 			}
 // 			{
 // 				type: 'toggle',
-// 				appKey: 'ShowSecondOnTap',
+// 				messageKey: 'ShowSecondOnTap',
 // 				label: 'Show Second Hand On Tap',
 // 				defaultValue: true
 // 			}
