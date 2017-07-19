@@ -1,6 +1,8 @@
 {
     "author": "iso2022jp",
-    "dependencies": {},
+    "dependencies": {
+        "pebble-clay": "^1.0.0"
+    },
     "keywords": [],
     "name": "ingress-one",
     "pebble": {
@@ -98,5 +100,5 @@
             "watchface": true
         }
     },
-    "version": "1.0.0"
+    "version": "1.1.0"
 }
