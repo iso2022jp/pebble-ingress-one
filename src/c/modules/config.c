@@ -1,7 +1,7 @@
 /* This software is released under the MIT License, see LICENSE */
 
 #include <pebble.h>
-#include "modules/config.h"
+#include "./config.h"
 
 #define PERSIST_SETTINGS_KEY	0
 

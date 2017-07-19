@@ -1,6 +1,8 @@
 {
     "author": "iso2022jp",
-    "dependencies": {},
+    "dependencies": {
+        "pebble-clay": "^1.0.0"
+    },
     "keywords": [],
     "name": "ingress-one",
     "pebble": {
@@ -33,7 +35,9 @@
                     "name": "IMAGE_SURFACE",
                     "targetPlatforms": [
                         "basalt",
-                        "chalk"
+                        "chalk",
+                        "diorite",
+                        "emery"
                     ],
                     "type": "bitmap"
                 },
@@ -63,21 +67,6 @@
                     "type": "bitmap"
                 },
                 {
-                    "file": "images/bluetooth-disconnected.png",
-                    "name": "IMAGE_BLUETOOTH_DISCONNECTED",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/bluetooth-connected.png",
-                    "name": "IMAGE_BLUETOOTH_CONNECTED",
-                    "targetPlatforms": [
-                        "basalt",
-                        "chalk"
-                    ],
-                    "type": "bitmap"
-                },
-                {
                     "file": "fonts/coda.ttf",
                     "name": "FONT_CODA_12",
                     "targetPlatforms": null,
@@ -102,12 +91,14 @@
         "targetPlatforms": [
             "aplite",
             "basalt",
-            "chalk"
+            "chalk",
+            "diorite",
+            "emery"
         ],
         "uuid": "1f1c5315-2db7-45fa-91ab-a0791b1f3fb6",
         "watchapp": {
             "watchface": true
         }
     },
-    "version": "1.0.0"
+    "version": "1.1.0"
 }

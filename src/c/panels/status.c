@@ -1,7 +1,7 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "panels/status.h"
-#include "misc.h"
+#include "./status.h"
+#include "../misc.h"
 
 static GRect m_bounds;
 static const Config *m_config;

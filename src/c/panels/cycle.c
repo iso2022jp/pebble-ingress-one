@@ -1,8 +1,8 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "panels/subclock.h"
-#include "modules/ingress.h"
-#include "misc.h"
+#include "./subclock.h"
+#include "../modules/ingress.h"
+#include "../misc.h"
 
 static GRect m_bounds;
 static const Config *m_config;

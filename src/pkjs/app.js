@@ -1,6 +1,6 @@
 /* This software is released under the MIT License, see LICENSE */
 
-var Clay = require('./clay');
+var Clay = require('pebble-clay');
 
 var config = require('./clay-config');
 var handler = require('./clay-handler');

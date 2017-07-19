@@ -1,7 +1,7 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "panels/hands.h"
-#include "misc.h"
+#include "./hands.h"
+#include "../misc.h"
 
 static const GPathInfo m_hourLocatorPath = {
 	.num_points = 3,

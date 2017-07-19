@@ -3,7 +3,7 @@
 #pragma once
 
 #include <pebble.h>
-#include "modules/config.h"
+#include "../modules/config.h"
 
 void main_push(void);
 void main_invalidate(void);

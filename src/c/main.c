@@ -1,8 +1,8 @@
 /* This software is released under the MIT License, see LICENSE */
 
 #include <pebble.h>
-#include "modules/config.h"
-#include "windows/main.h"
+#include "./modules/config.h"
+#include "./windows/main.h"
 
 //
 // Service Handlers

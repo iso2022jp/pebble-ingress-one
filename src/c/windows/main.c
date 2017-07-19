@@ -1,16 +1,16 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "windows/main.h"
+#include "./main.h"
 
-#include "panels/background.h"
-#include "panels/cycle.h"
-#include "panels/status.h"
-#include "panels/subclock.h"
-#include "panels/calendar.h"
-#include "panels/hands.h"
+#include "../panels/background.h"
+#include "../panels/cycle.h"
+#include "../panels/status.h"
+#include "../panels/subclock.h"
+#include "../panels/calendar.h"
+#include "../panels/hands.h"
 
-#include "modules/ingress.h"
-#include "modules/offscreen.h"
+#include "../modules/ingress.h"
+#include "../modules/offscreen.h"
 
 static Window *m_window;
 

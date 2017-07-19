@@ -1,9 +1,9 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "panels/background.h"
-#include "modules/ingress.h"
-#include "modules/offscreen.h"
-#include "misc.h"
+#include "./background.h"
+#include "../modules/ingress.h"
+#include "../modules/offscreen.h"
+#include "../misc.h"
 
 static GRect m_bounds;
 static const Config *m_config;
