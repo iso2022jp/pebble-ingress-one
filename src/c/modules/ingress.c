@@ -1,6 +1,6 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "modules/ingress.h"
+#include "./ingress.h"
 
 // 2014 Cycle 01, CheckPoint 00 (2014-01-08 03:00 UTC)
 // 2016 Cycle 01, CheckPoint 00 (2016-01-07 07:00 UTC)

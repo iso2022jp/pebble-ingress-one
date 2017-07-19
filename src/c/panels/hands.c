@@ -1,7 +1,7 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "panels/calendar.h"
-#include "config.h"
+#include "./calendar.h"
+#include "../config.h"
 
 static const GPathInfo m_hourLocatorPath = {
 	.num_points = 3,

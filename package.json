@@ -33,25 +33,15 @@
                     "name": "IMAGE_SURFACE",
                     "targetPlatforms": [
                         "basalt",
-                        "chalk"
+                        "chalk",
+                        "diorite",
+                        "emery"
                     ],
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/bluetooth.png",
-                    "name": "IMAGE_BLUETOOTH",
-                    "targetPlatforms": null,
                     "type": "bitmap"
                 },
                 {
                     "file": "images/power.png",
                     "name": "IMAGE_POWER",
-                    "targetPlatforms": null,
-                    "type": "bitmap"
-                },
-                {
-                    "file": "images/ingress.png",
-                    "name": "IMAGE_INGRESS",
                     "targetPlatforms": null,
                     "type": "bitmap"
                 },
@@ -63,9 +53,20 @@
                     "type": "png"
                 },
                 {
-                    "characterRegex": "[0-9.]",
+                    "file": "images/ingress.png",
+                    "name": "IMAGE_INGRESS",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "file": "images/bluetooth.png",
+                    "name": "IMAGE_BLUETOOTH",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
                     "file": "fonts/coda.ttf",
-                    "name": "FONT_CODA_10",
+                    "name": "FONT_CODA_12",
                     "targetPlatforms": null,
                     "type": "font"
                 },
@@ -76,8 +77,9 @@
                     "type": "font"
                 },
                 {
+                    "characterRegex": "[0-9.]",
                     "file": "fonts/coda.ttf",
-                    "name": "FONT_CODA_12",
+                    "name": "FONT_CODA_10",
                     "targetPlatforms": null,
                     "type": "font"
                 }
@@ -87,7 +89,9 @@
         "targetPlatforms": [
             "aplite",
             "basalt",
-            "chalk"
+            "chalk",
+            "diorite",
+            "emery"
         ],
         "uuid": "1f1c5315-2db7-45fa-91ab-a0791b1f3fb6",
         "watchapp": {

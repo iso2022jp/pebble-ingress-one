@@ -1,6 +1,6 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "panels/calendar.h"
+#include "./calendar.h"
 
 static GRect m_bounds;
 static const Config *m_config;

@@ -3,7 +3,7 @@
 #pragma once
 #include <pebble.h>
 
-#include "modules/config.h"
+#include "../modules/config.h"
 
 void panel_hands_create(GRect bounds, const Config *config);
 void panel_hands_destroy(void);

@@ -1,8 +1,8 @@
 /* This software is released under the MIT License, see LICENSE */
 
-#include "panels/background.h"
-#include "modules/ingress.h"
-#include "modules/offscreen.h"
+#include "./background.h"
+#include "../modules/ingress.h"
+#include "../modules/offscreen.h"
 
 #define MINUTE_TO_TRIGANGLE(m)	DEG_TO_TRIGANGLE((m) * 6)
 #define HOUR_TO_TRIGANGLE(h)	DEG_TO_TRIGANGLE((h) * 30)
